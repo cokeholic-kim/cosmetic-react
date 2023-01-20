@@ -16,7 +16,6 @@ const MainPage = () => {
     if (loading) return <div>로딩중</div>
     if (error) return <div>에러발생</div>
     if (!data) return null
-    console.log(data)
     return (
         <div className='main'>
             <div className='visual'>
@@ -26,7 +25,7 @@ const MainPage = () => {
                 <h2>신상품</h2>
                 <ul>
                     {data.map(pro=>
-                    <ProductList key={pro.p_id} p_id={pro.p_id} p_name={pro.p_name} p_price={pro.p_price}/>)}
+                    <ProductList key={pro.p_id} p_id={pro.p_id} p_name={pro.p_name} p_price={pro.p_price} p_img={pro.p_img}/>)}
                 </ul>
             </div>
         </div>
