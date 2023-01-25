@@ -14,8 +14,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.product ul li{
+.product ul a{
     width:25%;
+}
+.product ul li{
+    width:100%;
     /* border: 1px solid #ddd; */
     padding-bottom: 20px;
 }

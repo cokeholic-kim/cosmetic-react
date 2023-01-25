@@ -6,7 +6,7 @@ import './index.css'
 
 const UploadPage = () => {
     const navigate=useNavigate()
-    const [ formData,setFormData] = useState({
+    const [ formData,setFormData] = useState({ //form안에 입력된데이터들을받아줄상태값
         p_name:"",
         p_price:"",
         p_img:"",
@@ -27,6 +27,25 @@ const UploadPage = () => {
             p_img:"",
             p_desc:"",
             p_quantity:""    
+        })
+    }
+    const onChangeImage = (e)=>{
+        const {name}= e.target;
+        // 폼 태그 생성
+        const imageFormData = new FormData();
+        // 폼 태그에 속성 추가하기
+        imageFormData.append(name,e.target.files[0]);
+        //이미지 업로드 요청(서버로 이미지파일 업로드 요청)
+        axios.post("http://localhost:8080/upload",imageFormData,{
+            Headers:{'content-type':'multipart/form-data'}
+        }).then(res=>{
+            setFormData({
+                ...formData,
+                p_img:res.data.imageURL
+            })
+        })
+        .catch(e=>{
+            console.log(e)
         })
     }
     const onSubmit = (e)=>{
@@ -59,14 +78,13 @@ const UploadPage = () => {
                         <td>상품이름</td>
                         <td>
                             <input type="text" name="p_name" value={formData.p_name} onChange={onChange}/>
-                            
                         </td>
                     </tr>
                     <tr>
                         <td>이미지</td>
                         <td>
-                            <input type="text" name="p_img"  value={formData.p_img} onChange={onChange}/>
-                            
+                            <input type="file" name="file"  onChange={onChangeImage}/>
+                            { formData.p_img && <img src={`http://localhost:8080/upload/${formData.p_img}`} alt=""/>}
                         </td>
                     </tr>
                     <tr>
