@@ -2,6 +2,7 @@ import axios from 'axios';
 import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css'
+import { API_URL } from '../config/apiurl';
 
 
 const UploadPage = () => {
@@ -36,7 +37,7 @@ const UploadPage = () => {
         // 폼 태그에 속성 추가하기
         imageFormData.append(name,e.target.files[0]);
         //이미지 업로드 요청(서버로 이미지파일 업로드 요청)
-        axios.post("http://localhost:8080/upload",imageFormData,{
+        axios.post(`${API_URL}/upload`,imageFormData,{
             Headers:{'content-type':'multipart/form-data'}
         }).then(res=>{
             setFormData({
@@ -58,7 +59,7 @@ const UploadPage = () => {
     }
     function insertProduct(){
         // 서버에 post요청
-        axios.post("http://localhost:8080/addProduct",formData)
+        axios.post(`${API_URL}/addProduct`,formData)
         .then(res=>{
             console.log(res); //콘솔에 응답출력
             navigate('/'); //메인화면으로 이동
@@ -84,7 +85,7 @@ const UploadPage = () => {
                         <td>이미지</td>
                         <td>
                             <input type="file" name="file"  onChange={onChangeImage}/>
-                            { formData.p_img && <img src={`http://localhost:8080/upload/${formData.p_img}`} alt=""/>}
+                            { formData.p_img && <img src={`${API_URL}/upload/${formData.p_img}`} alt=""/>}
                         </td>
                     </tr>
                     <tr>

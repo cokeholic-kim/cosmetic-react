@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React,{useState} from 'react';
+import { API_URL } from '../config/apiurl';
+
 
 const ImageForm = () => {
     const [imageURL,setimageURL] = useState(null)
@@ -9,7 +11,7 @@ const ImageForm = () => {
         const imageFormData = new FormData();
         //<form>태그에 속성 추가하기
         imageFormData.append(name,e.target.files[0]);
-        axios.post('http://localhost:8080/upload',imageFormData,{
+        axios.post(`${API_URL}/upload`,imageFormData,{
             Headers:{'content-type':'multipart/formdata'},
         }).then(res=>{
             console.log(res);

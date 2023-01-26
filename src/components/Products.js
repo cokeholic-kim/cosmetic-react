@@ -3,7 +3,7 @@ import useAsync from '../customHook/useAsync';
 import axios from 'axios';
 
 async function getProducts(){
-    const response = await axios.get('http://localhost:8080/products');
+    const response = await axios.get(`${API_URL}/products`);
     return response.data ;
 }
 const Products = () => {

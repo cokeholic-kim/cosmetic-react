@@ -2,11 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductList from '../components/ProductList';
+import { API_URL } from '../config/apiurl';
 import useAsync from '../customHook/useAsync'
 import './index.css';
 
 async function productFetch(){
-    const response = await axios.get("http://localhost:8080/products");
+    const response = await axios.get(`${API_URL}/products`);
     return response.data
 }
 

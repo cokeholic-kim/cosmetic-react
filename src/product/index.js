@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { API_URL } from '../config/apiurl';
 import useAsync from '../customHook/useAsync';
 import './index.css'
 
 
 
 async function productFetch(id){
-    const response = await axios.get(`http://localhost:8080/products/${id}`);
+    const response = await axios.get(`${API_URL}/products/${id}`);
     return response.data
 }
 
@@ -19,7 +20,7 @@ const ProductPage = () => {
 
     // 삭제하기
     const onDelete = ()=>{
-        axios.delete(`http://localhost:8080/delProduct/${p_id}`) //get,post,delete,patch
+        axios.delete(`${API_URL}/delProduct/${p_id}`) //get,post,delete,patch
         .then(result=>{
             console.log("삭제되었습니다.")
             navigate('/')
@@ -37,8 +38,7 @@ const ProductPage = () => {
         <div className='productDetail'>
             <h2>기초스킨케어 세트</h2>
             <div className='productImg'>
-                <img src={`../images/cosmetic${Product.p_id}.JPG`} alt="" />
-                <img src = {`http://localhost:8080/upload/${Product.p_img}`} alt=""/>
+                <img src = {`${API_URL}/upload/${Product.p_img}`} alt=""/>
             </div>
             <div>
                 <p>스킨케어 주간 베스트</p>
